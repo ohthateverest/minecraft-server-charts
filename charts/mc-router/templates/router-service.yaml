@@ -7,9 +7,9 @@ metadata:
 spec:
   {{- with .Values.services.minecraft }}
   type: {{ .type }}
-  {{- if .type "LoadBalancer" }}
+  {{- if eq .type "LoadBalancer" }}
+  loadBalancerIP: {{ .loadBalancerIP }}
   {{- end }}
-  loadBalancerIP: {{ .Values.services.minecraft.loadBalancerIP }}
   ports:
     - port: {{ .port }}
       {{- if list "LoadBalancer" "NodePort" | has .type }}
